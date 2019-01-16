@@ -632,9 +632,7 @@
 										commit: function( type, element ) {
 											var value = this.getValue();
 											if ( type == IMAGE ) {
-												if ( value && editor.activeFilter.check( 'img{width,height}' ) )
-													element.setStyle( 'width', CKEDITOR.tools.cssLength( value ) );
-												else
+												if ( !(value && editor.activeFilter.check( 'img{width,height}' )) )
 													element.removeStyle( 'width' );
 
 												element.removeAttribute( 'width' );
@@ -673,9 +671,7 @@
 										commit: function( type, element ) {
 											var value = this.getValue();
 											if ( type == IMAGE ) {
-												if ( value && editor.activeFilter.check( 'img{width,height}' ) )
-													element.setStyle( 'height', CKEDITOR.tools.cssLength( value ) );
-												else
+												if ( !(value && editor.activeFilter.check( 'img{width,height}' )) )
 													element.removeStyle( 'height' );
 
 												element.removeAttribute( 'height' );
@@ -1163,7 +1159,7 @@
 							id: 'txtGenClass',
 							requiredContent: 'img(cke-xyz)', // Random text like 'xyz' will check if all are allowed.
 							label: editor.lang.common.cssClass,
-							'default': '',
+							'default': 'img-responsive',
 							setup: function( type, element ) {
 								if ( type == IMAGE )
 									this.setValue( element.getAttribute( 'class' ) );
